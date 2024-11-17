@@ -50,10 +50,6 @@ for player1_id, player1_data in players.items():
                 results[player2_id][player1_id] = "D"  # Draw
 
 
-for player_id, stats in players.items():
-    print(f"Player {player_id} ({stats['AI'].__name__}): Wins: {stats['wins']}, \
-Losses: {stats['loses']}, Draws: {stats['draws']}")
-
 # Find the maximum number of wins
 max_wins = max(player["wins"] for player in players.values())
 # Find all AIs with the maximum wins (in case of a tie)
@@ -61,22 +57,62 @@ total_winners = [player["name"] for player in players.values() if player["wins"]
 
 # Print the total winners
 if len(total_winners) > 1:
-    print(f"\nTotal Tournament Winners (tied): {', '.join(total_winners)} with {max_wins} wins each")
+    winner_text = f"\nTotal Tournament Winners (tied): {', '.join(total_winners)} with {max_wins} wins each"
 else:
-    print(f"\nTotal Tournament Winner: {total_winners[0]} with {max_wins} wins")
+    winner_text = f"\nTotal Tournament Winner: {total_winners[0]} with {max_wins} wins"
+print(winner_text)
 
 
-# Create a DataFrame for resultat
+# Create a DataFrame for results
 player_names = [player_data["name"] for player_data in players.values()]
 result_matrix = [[results[p1][p2] if p1 != p2 else "-" for p2 in players] for p1 in players]
 
-# Pandas DataFrame
+# Create Pandas DataFrame for match results
 df_results = pd.DataFrame(result_matrix, index=player_names, columns=player_names)
 
-# Print the table
-print("\nMatch Results Table:")
+# Print the match results table (W/L/D) in the terminal
+print("\nMatch Results Table (W/L/D):")
 print(df_results)
 
-# Export table to csv and html
-df_results.to_csv("match_results.csv", index=True)
-df_results.to_html("match_results.html")
+
+# Create a DataFrame for the leaderboard summary
+leaderboard_data = {
+    "Player": [player["name"] for player in players.values()],
+    "Wins": [player["wins"] for player in players.values()],
+    "Losses": [player["loses"] for player in players.values()],
+    "Draws": [player["draws"] for player in players.values()]
+}
+df_leaderboard = pd.DataFrame(leaderboard_data).sort_values(by="Wins", ascending=False)
+
+# Print the leaderboard in the terminal
+print("\nLeaderboard:")
+print(df_leaderboard)
+
+
+# Save match results and leaderboard to a single CSV file
+with open("tournament_results.csv", "w") as file:
+    # Write the leaderboard summary to the file
+    df_leaderboard.to_csv(file, index=False)
+    
+    # Add a blank line for separation
+    file.write("\n")
+    
+    # Write the match results table (W/L/D)
+    file.write("Match Results Table (W/L/D):\n")
+    df_results.to_csv(file, index=True)
+    
+    # Add winner information at the end of the CSV file
+    file.write("\n")
+    file.write(winner_text)
+
+
+# Save HTML file with the match results, leaderboard, and winner
+with open("match_results.html", "w") as file:
+    file.write("<h2>Match Results Table (W/L/D)</h2>")
+    file.write(df_results.to_html(index=True))
+    file.write("<h2>Leaderboard</h2>")
+    file.write(df_leaderboard.to_html(index=False))
+    file.write(f"<h3>{winner_text}</h3>")
+
+print("\nResults, match table, leaderboard, and winner saved to match_results.html and match_results.csv")
+
