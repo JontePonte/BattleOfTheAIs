@@ -28,21 +28,21 @@ for idx, (name, ai_function) in enumerate(ai_registry.items(), start=1):
     }
 
 
+
 # Initialize result matrix
 results = {p1: {p2: None for p2 in players} for p1 in players}
-
 
 for player1_id, player1_data in players.items():
     for player2_id, player2_data in players.items():
         if player1_id < player2_id:  # Avoid double matches and self matches
             winner, game_info = play_match(player1_data["AI"], player2_data["AI"])
-            
-            if winner == "player1":
+
+            if winner == player1_data["name"]:
                 players[player1_id]["wins"] += 1
                 players[player2_id]["loses"] += 1
                 results[player1_id][player2_id] = "W"  # Win för player1
                 results[player2_id][player1_id] = "L"  # Loss för player2
-            elif winner == "player2":
+            elif winner == player2_data["name"]:
                 players[player2_id]["wins"] += 1
                 players[player1_id]["loses"] += 1
                 results[player1_id][player2_id] = "L"  # Loss för player1

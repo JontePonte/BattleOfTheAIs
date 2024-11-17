@@ -1,16 +1,22 @@
+
+import inspect
 import random
+
+
 
 def full_random(game_info):
     """ Random choise between attack and defend """
 
     # Unpack game info
-    _player1_score = game_info['player1']['score']
-    _player1_health = game_info['player1']['health']
-    _player1_moves = game_info['player1']['moves']
-
-    _player2_score = game_info['player2']['score']
-    _player2_health = game_info['player2']['health']
-    _player2_moves = game_info['player2']['moves']
+    for ai_name in game_info:
+        if ai_name == inspect.currentframe().f_code.co_name:
+            my_score = game_info[ai_name]['score']
+            my_health = game_info[ai_name]['health']
+            my_moves = game_info[ai_name]['moves']
+        else:
+            opponent_score = game_info[ai_name]['score']
+            opponent_health = game_info[ai_name]['health']
+            opponent_moves = game_info[ai_name]['moves']
 
     action = random.choice(["attack", "defend"])
 

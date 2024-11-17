@@ -4,14 +4,17 @@
 def play_round(player1_move, player2_move, game_info):
     """Play one round between player 1 and player 2"""
 
-    # Unpack game info
-    player1_score = game_info['player1']['score']
-    player1_health = game_info['player1']['health']
-    player1_moves = game_info['player1']['moves']
+    player1_name = list(game_info.keys())[0]
+    player2_name = list(game_info.keys())[1]
 
-    player2_score = game_info['player2']['score']
-    player2_health = game_info['player2']['health']
-    player2_moves = game_info['player2']['moves']
+    # Unpack game info
+    player1_score = game_info[player1_name]['score']
+    player1_health = game_info[player1_name]['health']
+    player1_moves = game_info[player1_name]['moves']
+
+    player2_score = game_info[player2_name]['score']
+    player2_health = game_info[player2_name]['health']
+    player2_moves = game_info[player2_name]['moves']
 
 
     # Attack vs Attack
@@ -60,12 +63,12 @@ def play_round(player1_move, player2_move, game_info):
 
     # Store new game info
     new_game_info = {
-        "player1": {
+        player1_name: {
             "score": player1_score,
             "health": player1_health,
             "moves": player1_moves
         },
-        "player2": {
+        player2_name: {
             "score": player2_score,
             "health": player2_health,
             "moves": player2_moves
