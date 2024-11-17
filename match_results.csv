@@ -1,0 +1,5 @@
+,full_random,aggressor,super_aggressor,super_defender
+full_random,-,W,W,L
+aggressor,L,-,W,W
+super_aggressor,L,L,-,W
+super_defender,W,L,L,-
