@@ -7,7 +7,7 @@ from ai_aggressor import aggressor
 from ai_super_aggressor import super_aggressor
 from ai_super_defender import super_defender
 
-# test change
+
 # All condenders are added here
 ai_registry = {
     "full_random": full_random,
