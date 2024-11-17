@@ -4,7 +4,10 @@ import inspect
 def super_defender(game_info):
     """ AI that allways defend """
 
-        # Unpack game info
+    # Unpack game info
+    my_score, my_health, my_moves = None, None, None
+    opponent_score, opponent_health, opponent_moves = None, None, None
+    
     for ai_name in game_info:
         if ai_name == inspect.currentframe().f_code.co_name:
             my_score = game_info[ai_name]['score']
