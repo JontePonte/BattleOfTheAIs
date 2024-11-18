@@ -12,6 +12,7 @@ import pandas as pd
 from play_match import play_match
 from registry import ai_registry
 
+
 # Infomation 
 players = {}
 for idx, (name, ai_function) in enumerate(ai_registry.items(), start=1):
@@ -87,6 +88,22 @@ df_leaderboard = pd.DataFrame(leaderboard_data).sort_values(by="Wins", ascending
 # Print the leaderboard in the terminal
 print("\nLeaderboard:")
 print(df_leaderboard)
+
+
+# Print the moves if there is just 2 players
+print(" ")
+if len(players) == 2:
+    player_names = list(game_info.keys())
+    moves1 = game_info[player_names[0]]["moves"]
+    moves2 = game_info[player_names[1]]["moves"]
+
+    # Header, names of the AI:s
+    print(f"{player_names[0]:<20} {player_names[1]:<20}")
+    print("-" * 40)
+
+    # Print the moves
+    for move1, move2 in zip(moves1, moves2):
+        print(f"{move1:<20} {move2:<20}")
 
 
 # Save match results and leaderboard to a single CSV file
