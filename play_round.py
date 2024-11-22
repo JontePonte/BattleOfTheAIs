@@ -35,13 +35,13 @@ def play_round(player1_move, player2_move, game_info):
         player1_moves.append("attack")
 
         player2_score += 0
-        player2_health += 0
+        player2_health += 1
         player2_moves.append("defend")
 
 
     elif player1_move == "defend" and player2_move == "attack":
         player1_score += 0
-        player1_health += 0
+        player1_health += 1
         player1_moves.append("defend")
 
         player2_score += 1
@@ -52,11 +52,11 @@ def play_round(player1_move, player2_move, game_info):
 
     # Defend vs Defend
     elif player1_move == "defend" and player2_move == "defend":
-        player1_score += 0
+        player1_score += 1
         player1_health += 1
         player1_moves.append("defend")
 
-        player2_score += 0
+        player2_score += 1
         player2_health += 1
         player2_moves.append("defend")
 

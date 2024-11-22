@@ -6,15 +6,17 @@ def play_match(player1, player2):
     player1_name = player1.__name__
     player2_name = player2.__name__
 
+    start_health = 3
+
     game_info = {
         player1_name: {
             "score": 0,
-            "health": 5,
+            "health": start_health,
             "moves": []
         },
         player2_name: {
             "score": 0,
-            "health": 5,
+            "health": start_health,
             "moves": []
         }
     }
