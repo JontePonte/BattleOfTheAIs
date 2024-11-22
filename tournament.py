@@ -10,19 +10,20 @@ import pandas as pd
 
 
 from play_match import play_match
-from registry import ai_registry
+from registry import ai_list
 
 
 # Infomation 
 players = {}
-for idx, (name, ai_function) in enumerate(ai_registry.items(), start=1):
+for idx, ai_function in enumerate(ai_list, start=1):
     players[idx] = {
         "AI": ai_function,
-        "name": name,
+        "name": ai_function.__name__,
         "wins": 0,
         "loses": 0,
         "draws": 0,
     }
+    
 
 
 # Initialize result matrix
