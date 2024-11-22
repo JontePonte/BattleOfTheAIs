@@ -3,6 +3,11 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+
+# output files
+tournament_results.csv
+match_results.html
+
 # C extensions
 *.so
 
