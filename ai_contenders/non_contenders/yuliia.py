@@ -1,6 +1,6 @@
 import inspect
 
-def Yuliias_AI (game_info):
+def Yuliias_AI(game_info):
 
     # Unpack game info
     my_health, my_moves = None, []
