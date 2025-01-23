@@ -10,10 +10,11 @@ import pandas as pd
 
 
 from play_match import play_match
-from registry import ai_list
+from registry import get_ai_list
 
 
-# Infomation 
+# Infomation
+ai_list = get_ai_list()
 players = {}
 for idx, ai_function in enumerate(ai_list, start=1):
     players[idx] = {
